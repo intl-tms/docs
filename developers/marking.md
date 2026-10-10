@@ -27,6 +27,9 @@ key `a.b` marks as `a\.b` and the nested path `a` → `b` marks as `a.b`.
 Only plain objects are walked. Class instances, dates and maps are carried
 through untouched.
 
+A key that starts with `shared` is a
+[Shared translation](./shared-translations).
+
 ## The marker format
 
 A marker is `U+2063 · version · key bytes · CRC-8 · U+2064`, each byte as two

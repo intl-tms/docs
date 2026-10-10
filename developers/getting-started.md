@@ -434,5 +434,7 @@ and 7 and the structure of this page follow its
 - [Storage adapter](./storage-adapter): the four functions you write to keep
   what Editors save.
 - [Security](./security): read this before you ship.
+- [Shared translations](./shared-translations): tell Editors which texts are
+  used in more than one place.
 - [The Storybook addon](./storybook): edit the same translations on your
   stories.

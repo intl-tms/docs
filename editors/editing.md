@@ -42,8 +42,21 @@ and keeps what you typed.
 
 ## Shared text
 
-A **Shared** badge means the text may appear in more than one place. Changing
-it changes it everywhere it is used.
+Some text is used in many places, such as a **Cancel** or **OK** button. The
+panel marks it with a **Shared** badge and the note *This text may appear in
+more than one place.*
+
+Changing it changes it everywhere it is used, not only where you clicked.
+Before you save:
+
+- Word it so it fits every place, not only the one in front of you.
+- Look at [Used on](#used-on) for the other pages where it has been seen.
+
+If one place needs its own wording, ask your developer for a separate text
+there. The panel cannot split a Shared text.
+
+Your developer decides which texts get the badge. A text without it can still
+appear in more than one place, and **Used on** shows that too.
 
 ## Text you cannot see
 

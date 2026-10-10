@@ -42,8 +42,10 @@ because it comes from a non-browser caller with no ambient cookies.
 
 ### Shared keys
 
-A key under the fixed prefix `shared` (case-sensitive) is flagged as possibly
-appearing in more than one place.
+A key that starts with the fixed prefix `shared` (case-sensitive) is flagged as
+possibly appearing in more than one place. The rule is by name alone: it tests
+only the start of the key, needs no `.` after the prefix, and never checks
+where the key is really used. See [Shared translations](./shared-translations).
 
 ## Storybook addon
 

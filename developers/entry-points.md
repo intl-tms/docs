@@ -20,6 +20,9 @@ The list of public names on each entry is pinned by a test.
 | Storage | `createMemoryAdapter`, `detectAdapterCapabilities`, `runAdapterConformance` |
 | Handler | `createHandler` |
 
+`isSharedKey` and `SHARED_NOTICE` are described in
+[Shared translations](./shared-translations).
+
 ## `@intl-tms/core/tools` (editing tools)
 
 | Group | Exports |
