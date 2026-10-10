@@ -24,7 +24,7 @@ export default defineConfig({
           text: 'Introduction',
           items: [
             {text: 'How it works', link: '/developers/'},
-            {text: 'Getting started', link: '/developers/getting-started'},
+            {text: 'Getting started with Next.js', link: '/developers/getting-started'},
             {text: 'Try the demo app', link: '/developers/demo-app'}
           ]
         },
@@ -39,10 +39,16 @@ export default defineConfig({
           ]
         },
         {
+          text: 'Editing tools',
+          items: [
+            {text: 'The Extension', link: '/developers/extension'},
+            {text: 'The Storybook addon', link: '/developers/storybook'}
+          ]
+        },
+        {
           text: 'Reference',
           items: [
             {text: 'Entry points', link: '/developers/entry-points'},
-            {text: 'The Extension', link: '/developers/extension'},
             {text: 'Design decisions', link: '/developers/decisions'}
           ]
         }

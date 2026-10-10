@@ -45,6 +45,48 @@ because it comes from a non-browser caller with no ambient cookies.
 A key under the fixed prefix `shared` (case-sensitive) is flagged as possibly
 appearing in more than one place.
 
+## Storybook addon
+
+### Configured in the preview file, with no Storybook import
+
+The addon is a decorator, a `globalTypes` entry and two helper functions:
+plain values that a Developer spreads into `.storybook/preview.ts`. Its options
+(a configuration, a request function, callbacks) only exist in the preview
+bundle, which a `main.ts` preset could not carry. Importing nothing from
+Storybook keeps the Core at zero dependencies, makes the addon work with every
+renderer, and means a Storybook major does not break it.
+
+### The panel is in the preview, not in Storybook's addon panel
+
+A tab in Storybook's own panel needs the manager API and React, so
+dependencies and a bundled manager entry, plus a message protocol between two
+frames like the Extension's. In the preview the session and the panel share a
+document, the panel also works in docs mode, and nothing has to be relayed. A
+manager panel is not ruled out: it can be a separate package on top of this
+entry.
+
+### The Core ships one view
+
+Until the addon the Core had no view code. It now has `createPanelView`, plain
+DOM over the panel store with the same Diagnostics pane as the Extension's
+panel, reachable only from the Storybook entry. The website
+and editing-tool entries are unchanged, and a test pins that they do not reach
+it. The Extension keeps its own view.
+
+### Stored values are read per key and laid over the bundled messages
+
+A story renders what Storybook bundled, so it would show the bundled text
+while the panel shows what the store holds. While editing is on, the addon
+reads the stored values of each key a story shows, once, a few at a time,
+writes a differing plain value into the story, and `mark` lays the values over
+the Catalog for later renders. One request per key is the price of having no
+bulk read in the wire contract yet. Nothing is reloaded after a save.
+
+### Usage is never reported from Storybook
+
+A story's address is not a page of the website, and reporting it would fill
+"Used on" with addresses no Editor can visit.
+
 ## Extension
 
 ### Chrome only, baseline scope
