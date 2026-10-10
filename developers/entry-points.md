@@ -35,6 +35,25 @@ The list of public names on each entry is pinned by a test.
 | Panel logic | `buildChanges`, `changedColumns`, `shouldRenderToolbar`, `resolveToolbarFilters`, `visibleLocales`, `hiddenErrors`, `usagePath`, `relativeTime`, `conflictNotice`, `explainSaveFailure`, `fieldText`, `PANEL_TEXT` |
 | Shared rule | `isSharedKey`, `SHARED_NOTICE` |
 
+### Building your own editing tool
+
+The Extension and the [Storybook addon](./storybook) are two Hosts of the Core.
+To build another, wire a session to a panel store. The Core ships both; the
+view is yours, or the Core's built-in one (`createPanelView` from
+`@intl-tms/core/storybook`).
+
+```ts
+import { createClient, createPanelStore, createSession } from "@intl-tms/core/tools";
+
+const client = createClient({ getConfig: () => served /* GET {basePath}/config */ });
+const panel = createPanelStore({ persist: (changes) => session.save(panel.getState().selection!.key, changes) });
+const session = createSession({ sink: panel, client, getConfig: () => served, getLocale: () => document.documentElement.lang });
+session.start(document);
+```
+
+The panel store is the session's sink directly. Render `panel.getState()`
+however you like and subscribe with `panel.subscribe`.
+
 ## `@intl-tms/core/storybook` (Storybook addon)
 
 | Group | Exports |

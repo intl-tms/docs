@@ -14,7 +14,7 @@ Svelte, web components, HTML) and adds no dependency.
 
 ## What you need
 
-- A website that already [serves the endpoints](./getting-started#_3-serve-the-endpoints).
+- A website that already [serves the endpoints](./getting-started#_8-serve-the-endpoints).
   Storybook edits through the same handler and the same storage adapter.
 - Storybook 8.2 or newer, for `initialGlobals`. The addon is tested against
   Storybook 10.
@@ -282,6 +282,5 @@ const tms = createStorybookAddon({ config, request: (url, init) => handler(new R
 
 ## Example
 
-Both apps of the [demo app](./demo-app#storybook) have a Storybook with the
-addon set up: `apps/web/.storybook/` and
-`apps/next-intl-extracted/.storybook/`.
+The [demo app](./demo-app#storybook) has a Storybook with the addon set up,
+in `apps/web/.storybook/`.

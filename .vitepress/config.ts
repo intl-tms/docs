@@ -24,7 +24,7 @@ export default defineConfig({
           text: 'Introduction',
           items: [
             {text: 'How it works', link: '/developers/'},
-            {text: 'Getting started', link: '/developers/getting-started'},
+            {text: 'Getting started with Next.js', link: '/developers/getting-started'},
             {text: 'Try the demo app', link: '/developers/demo-app'}
           ]
         },

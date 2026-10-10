@@ -6,12 +6,9 @@ editing it.
 
 **Repository: [github.com/intl-tms/demo-app](https://github.com/intl-tms/demo-app)**
 
-It is a Turborepo. The app to run is `apps/web`: Next.js with next-intl, English
-and Danish, storing edits in MongoDB.
-
-A second app, `apps/next-intl-extracted`, shows the same integration with
-messages extracted from `useExtracted` calls. It is on the
-`feature/next-intl-extracted` branch and not yet on `main`.
+It is one example of an integration, not the reference for one. Its storage
+choice (MongoDB) and the way it reads saved values are its own; yours can be
+anything that satisfies the [storage adapter](./storage-adapter) contract.
 
 ## What you need
 
@@ -41,7 +38,7 @@ npm run build
 cd ..
 ```
 
-## 3. Run a demo app
+## 3. Run the demo app
 
 ```bash
 cd demo-app
@@ -52,16 +49,8 @@ pnpm --filter web dev
 
 Open `http://localhost:3000`.
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `MONGODB_URI` | none, required | Where edits and usage are stored. |
-| `MONGODB_DB` | `intl-tms` | The database name. |
-| `SITE_URL` | `http://localhost:3000` | The origin the endpoints are published under. |
-| `TMS_EDITING` | off | Set to `1` to enable editing outside `next dev`. Editing is always on in development. |
-
-To run the other app, check out `feature/next-intl-extracted`, put the same
-`.env.local` in `apps/next-intl-extracted`, and run
-`pnpm --filter next-intl-extracted dev`.
+`MONGODB_URI` is the only setting it needs. Editing is always on under
+`next dev`.
 
 ## 4. Build and load the Extension
 
@@ -85,47 +74,10 @@ The rest is in the [Editor guide](/editors/editing).
 
 ## Storybook
 
-Both apps have a Storybook with the [Storybook addon](./storybook) set up, so
-you can edit the same translations on a story, without the Extension.
-
-Keep the app running (step 3), since Storybook saves through its endpoints,
-and in a second terminal:
-
-```bash
-pnpm --filter web storybook
-```
-
-Open `http://localhost:6006`, choose **Edit translations: on** in the toolbar,
-hold **Alt** and click an outlined text. The **Locale** button next to it
-switches the story between English and Danish.
-
-| File | What it does |
-| --- | --- |
-| `.storybook/preview.tsx` | Creates the addon with the app's Config URL, adds the toolbar switch and the decorator, and passes the messages through `tms.mark`. |
-| `.storybook/main.ts` | Storybook's own configuration (`@storybook/nextjs-vite`), plus Tailwind and access to the linked Core. |
-| `.storybook/navigation.mock.ts` | Stands in for `src/i18n/navigation` in stories, which have no route. |
-| `src/app/api/tms/[...path]/route.ts` | Lists Storybook's origin in `cors.origins`. Set `STORYBOOK_URL` if yours is not `http://localhost:6006`. |
-
-In `apps/next-intl-extracted`, `.storybook/main.ts` also runs next-intl's
-extraction loader, so `useExtracted` calls are compiled to message ids in
-Storybook as they are in `next dev`.
-
-With edit mode on, a story shows the values stored in MongoDB, the same ones
-the website shows, not only the bundled messages. See
-[A story shows what the store holds](./storybook#a-story-shows-what-the-store-holds).
-
-## Where the integration lives
-
-In `apps/web/src/`:
-
-| File | What it does |
-| --- | --- |
-| `tms/config.ts` | `resolveConfig` with the next-intl locales, and the `editingEnabled` deployment switch. |
-| `tms/messages.ts` | Reads the Toggle cookie, overlays stored values on the bundled messages, and calls `markCatalog`. |
-| `tms/adapter.ts` | The MongoDB [storage adapter](./storage-adapter). |
-| `tms/bundled.ts` | Looks up a key's bundled message so the panel edits the real pattern. |
-| `i18n/request.ts` | Hands next-intl marked messages during an editing session, plain ones otherwise. |
-| `app/api/tms/[...path]/route.ts` | Mounts `createHandler`. |
+The app also has a Storybook with the [Storybook addon](./storybook) set up.
+Keep the app running, since Storybook saves through its endpoints, and in a
+second terminal run `pnpm --filter web storybook`. Open
+`http://localhost:6006` and choose **Edit translations: on** in the toolbar.
 
 ::: warning Demo authorization
 The demo's `authorize` allows anyone to read and write while editing is
