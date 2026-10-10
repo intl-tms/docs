@@ -54,12 +54,22 @@ included, and every response declares `Vary: Origin`.
 If a browser extension talks to your endpoints from its own origin, list that
 origin in `cors.origins`.
 
+The [Storybook addon](./storybook) always does: a Storybook is its own origin.
+List it (`http://localhost:6006` in development, and a deployed Storybook's
+address if Editors use one), and remember that listing an origin only lets its
+requests through to `authorize`. Storybook is not signed in to your website, so
+the addon's `request` option must carry whatever `authorize` checks. Do not
+loosen `authorize` to make Storybook work.
+
 ## On the page
 
 - Text is only ever inserted into the page as text, never as markup.
 - The highlighter injects one `<style>` element. It never writes inline styles,
   but a page whose content security policy forbids inline `<style>` elements
   needs `style-src` to allow it for editing sessions.
+
+In Storybook the panel is added to the preview frame in a shadow root, with
+its styles in one `<style>` element inside it.
 
 ## Caching
 

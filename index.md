@@ -23,6 +23,8 @@ features:
     details: The Core defines the seam and never crosses it. You write the storage adapter and the authorization check; neither has a default.
   - title: Off means off
     details: With editing switched off, your output is byte-for-byte what it would be without Intl TMS.
+  - title: On the website and in Storybook
+    details: Editors use a Chrome extension on the running website. Developers can switch the same editing on in Storybook with an addon configured in code.
   - title: No runtime dependencies
     details: Web-standard APIs only. The request handler is one function from a Request to a Response.
 ---

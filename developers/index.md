@@ -11,8 +11,9 @@ adapter **you** write.
 
 | Piece | What it is | Repository |
 | --- | --- | --- |
-| **Core** (`@intl-tms/core`) | The library-agnostic package on both sides of the seam between a website and its editing tools: marker codec, Catalog marking, request handler, page-side editing flow and panel state machine. No view, storage or i18n-library code. | [intl-tms/core](https://github.com/intl-tms/core) |
+| **Core** (`@intl-tms/core`) | The library-agnostic package on both sides of the seam between a website and its editing tools: marker codec, Catalog marking, request handler, page-side editing flow and panel state machine. No storage or i18n-library code. | [intl-tms/core](https://github.com/intl-tms/core) |
 | **Extension** | A Chrome extension that hosts the Core's editing session: outlines, Alt-click, and a side panel. | [intl-tms/extension](https://github.com/intl-tms/extension) |
+| **Storybook addon** (`@intl-tms/core/storybook`) | The same editing session inside Storybook, configured in your preview file. No extension needed. Ships in the Core. | [intl-tms/core](https://github.com/intl-tms/core) |
 | **Demo app** | A Next.js app using next-intl, with the Core integrated and a MongoDB storage adapter. Clone it to try everything locally. | [intl-tms/demo-app](https://github.com/intl-tms/demo-app) |
 
 ## The flow
@@ -27,6 +28,10 @@ adapter **you** write.
    endpoints your website serves with `createHandler`.
 5. The Editor saves. The handler validates the write, asks your `authorize`
    function, and calls your storage adapter.
+
+In Storybook the first two steps are a toolbar switch and one function call in
+your preview file instead of a cookie; the rest is the same. See
+[The Storybook addon](./storybook).
 
 ## Principles
 
@@ -43,4 +48,5 @@ adapter **you** write.
 
 - [Getting started](./getting-started): integrate the Core into a website.
 - [Try the demo app](./demo-app): see a working integration first.
+- [The Storybook addon](./storybook): edit translations on your stories.
 - [Security](./security): read this before you ship.

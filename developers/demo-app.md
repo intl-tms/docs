@@ -83,6 +83,37 @@ unpacked** and pick the `extension/dist` folder.
 
 The rest is in the [Editor guide](/editors/editing).
 
+## Storybook
+
+Both apps have a Storybook with the [Storybook addon](./storybook) set up, so
+you can edit the same translations on a story, without the Extension.
+
+Keep the app running (step 3), since Storybook saves through its endpoints,
+and in a second terminal:
+
+```bash
+pnpm --filter web storybook
+```
+
+Open `http://localhost:6006`, choose **Edit translations: on** in the toolbar,
+hold **Alt** and click an outlined text. The **Locale** button next to it
+switches the story between English and Danish.
+
+| File | What it does |
+| --- | --- |
+| `.storybook/preview.tsx` | Creates the addon with the app's Config URL, adds the toolbar switch and the decorator, and passes the messages through `tms.mark`. |
+| `.storybook/main.ts` | Storybook's own configuration (`@storybook/nextjs-vite`), plus Tailwind and access to the linked Core. |
+| `.storybook/navigation.mock.ts` | Stands in for `src/i18n/navigation` in stories, which have no route. |
+| `src/app/api/tms/[...path]/route.ts` | Lists Storybook's origin in `cors.origins`. Set `STORYBOOK_URL` if yours is not `http://localhost:6006`. |
+
+In `apps/next-intl-extracted`, `.storybook/main.ts` also runs next-intl's
+extraction loader, so `useExtracted` calls are compiled to message ids in
+Storybook as they are in `next dev`.
+
+With edit mode on, a story shows the values stored in MongoDB, the same ones
+the website shows, not only the bundled messages. See
+[A story shows what the store holds](./storybook#a-story-shows-what-the-store-holds).
+
 ## Where the integration lives
 
 In `apps/web/src/`:

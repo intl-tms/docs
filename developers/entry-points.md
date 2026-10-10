@@ -1,8 +1,8 @@
 # Entry points
 
-Two audiences, two entries. Only the website entry carries a stability promise;
-the editing-tool entry changes with the tools that consume it, so pin an exact
-version if you build on it.
+Three audiences, three entries. Only the website entry carries a stability
+promise; the editing-tool and Storybook entries change with the tools that
+consume them, so pin an exact version if you build on them.
 
 The list of public names on each entry is pinned by a test.
 
@@ -34,6 +34,24 @@ The list of public names on each entry is pinned by a test.
 | Panel store | `createPanelStore` |
 | Panel logic | `buildChanges`, `changedColumns`, `shouldRenderToolbar`, `resolveToolbarFilters`, `visibleLocales`, `hiddenErrors`, `usagePath`, `relativeTime`, `conflictNotice`, `explainSaveFailure`, `fieldText`, `PANEL_TEXT` |
 | Shared rule | `isSharedKey`, `SHARED_NOTICE` |
+
+## `@intl-tms/core/storybook` (Storybook addon)
+
+| Group | Exports |
+| --- | --- |
+| Addon | `createStorybookAddon`, `EDIT_GLOBAL`, `STORYBOOK_TEXT` |
+| Built-in panel | `createPanelView`, `createLog`, `PANEL_CSS`, `PANEL_VIEW_TEXT` |
+
+`createStorybookAddon` is described in [The Storybook addon](./storybook).
+`EDIT_GLOBAL` is the name of the Storybook global behind the toolbar switch
+(`tmsEdit`, with the values `"on"` and `"off"`).
+
+`createPanelView` is the addon's panel on its own: plain DOM over
+`createPanelStore`, for a Host that wants a working panel without writing a
+view. It is a session's sink directly, it includes the Diagnostics pane, and
+`PANEL_CSS` is its stylesheet, written for a shadow root. `createLog` is the
+diagnostic log, for a Host that wants to add entries of its own. This is the only view code in the Core, and the
+other two entries do not reach it.
 
 ## Not built yet
 

@@ -136,11 +136,15 @@ Install the [Extension](./extension), give it your Config URL (the handler's
 `/config` address, for example `https://app.example.com/api/tms/config`), and
 follow the [Editor guide](/editors/install).
 
+If you have a Storybook, you can also edit there, without the Extension: see
+[The Storybook addon](./storybook).
+
 ## Building your own editing tool
 
-The Extension is one Host of the Core. To build another (a component-workbench
-addon, for example), wire a session to a panel store. The Core ships both; the
-views are yours.
+The Extension and the [Storybook addon](./storybook) are two Hosts of the Core.
+To build another, wire a session to a panel store. The Core ships both; the
+view is yours, or the Core's built-in one (`createPanelView` from
+`@intl-tms/core/storybook`).
 
 ```ts
 import { createClient, createPanelStore, createSession } from "@intl-tms/core/tools";
