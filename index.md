@@ -56,8 +56,8 @@ library.
   [How it works](/developers/), then follow the step-by-step
   [Next.js guide](/developers/getting-started).
 - **You want to see it running first.** Clone the
-  [demo app](https://github.com/intl-tms/demo-app) and follow
-  [Try the demo app](/developers/demo-app).
+  [demo app](https://github.com/intl-tms/demo-app) and follow its
+  [README](https://github.com/intl-tms/demo-app#running-it).
 - **You edit translations.** Go to the [Editor guide](/editors/).
 
 ## Credits
