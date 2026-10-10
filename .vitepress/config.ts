@@ -1,0 +1,71 @@
+import {defineConfig} from 'vitepress';
+
+const org = 'https://github.com/intl-tms';
+
+export default defineConfig({
+  title: 'Intl TMS',
+  description: "Edit a website's translations directly on the rendered page.",
+  // Served from https://intl-tms.github.io/docs/
+  base: '/docs/',
+  cleanUrls: true,
+  lastUpdated: true,
+  srcExclude: ['README.md'],
+
+  themeConfig: {
+    nav: [
+      {text: 'Developers', link: '/developers/', activeMatch: '^/developers/'},
+      {text: 'Editors', link: '/editors/', activeMatch: '^/editors/'},
+      {text: 'Demo app', link: `${org}/demo-app`}
+    ],
+
+    sidebar: {
+      '/developers/': [
+        {
+          text: 'Introduction',
+          items: [
+            {text: 'How it works', link: '/developers/'},
+            {text: 'Getting started', link: '/developers/getting-started'},
+            {text: 'Try the demo app', link: '/developers/demo-app'}
+          ]
+        },
+        {
+          text: 'Integrating a website',
+          items: [
+            {text: 'Configuration', link: '/developers/configuration'},
+            {text: 'Storage adapter', link: '/developers/storage-adapter'},
+            {text: 'Wire contract', link: '/developers/wire-contract'},
+            {text: 'Security', link: '/developers/security'},
+            {text: 'What marking does to strings', link: '/developers/marking'}
+          ]
+        },
+        {
+          text: 'Reference',
+          items: [
+            {text: 'Entry points', link: '/developers/entry-points'},
+            {text: 'The Extension', link: '/developers/extension'},
+            {text: 'Design decisions', link: '/developers/decisions'}
+          ]
+        }
+      ],
+      '/editors/': [
+        {
+          text: 'Editor guide',
+          items: [
+            {text: 'Overview', link: '/editors/'},
+            {text: 'Install and switch on', link: '/editors/install'},
+            {text: 'Edit and save', link: '/editors/editing'},
+            {text: 'Troubleshooting', link: '/editors/troubleshooting'}
+          ]
+        }
+      ]
+    },
+
+    socialLinks: [{icon: 'github', link: `${org}/demo-app`}],
+    search: {provider: 'local'},
+    editLink: {
+      pattern: `${org}/docs/edit/main/:path`,
+      text: 'Edit this page on GitHub'
+    },
+    outline: [2, 3]
+  }
+});

@@ -1,0 +1,29 @@
+# Editor guide
+
+Intl TMS lets you edit a website's text directly on the page. Switch it on for
+a website, hold **Alt** and click any outlined text, edit it in every language
+in the side panel, and save.
+
+Nothing is deployed and no other visitor sees the outlines or the editing
+tools.
+
+## What you need
+
+- **Google Chrome.**
+- **The Intl TMS extension.** See [Install and switch on](./install).
+- **A Config URL** for the website you want to edit. It is a full address
+  beginning with `https://`, and the website's developer gives it to you.
+- **To be signed in** to the website with an account that is allowed to edit
+  translations.
+
+## The steps
+
+1. [Install the extension and switch it on](./install) for your website.
+2. [Edit and save](./editing) text.
+3. If something does not work, check [Troubleshooting](./troubleshooting).
+
+::: tip Just want to try it?
+A developer can set up the [demo app](/developers/demo-app) on their own
+machine in a few minutes, and you can practise there without touching a real
+website.
+:::
