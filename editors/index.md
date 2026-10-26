@@ -1,5 +1,10 @@
 # Editor guide
 
+::: warning Under development
+Intl TMS is still being built. Use it only on test websites your team has
+set up for it, not on a live website.
+:::
+
 Intl TMS lets you edit a website's text directly on the page. Switch it on for
 a website, hold **Alt** and click any outlined text, edit it in every language
 in the side panel, and save.

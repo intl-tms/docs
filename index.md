@@ -31,6 +31,12 @@ features:
     details: Web-standard APIs only. The request handler is one function from a Request to a Response.
 ---
 
+::: danger Under development, not for production
+Intl TMS has no built-in authentication, and the API can change between any
+two releases. Use it on local and test environments only.
+[Read why](/developers/security#not-ready-for-production).
+:::
+
 ## What it is, and what it is not
 
 Intl TMS is **not an internationalization library**. It does not load
@@ -65,6 +71,4 @@ library.
 The guides and the demo app are built on [next-intl](https://next-intl.dev),
 the internationalization library for Next.js created by
 [Jan Amann](https://github.com/amannn). It does the real work of
-internationalization in everything shown here, and the step-by-step guide
-follows the shape of its
-[App Router setup](https://next-intl.dev/docs/getting-started/app-router).
+internationalization in everything shown here. See [Credits](/credits).

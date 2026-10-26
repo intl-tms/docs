@@ -61,25 +61,12 @@ website already uses next-intl, you only need the three files that are new: `src
 
 ## 1. Create the app and install the packages
 
-`@intl-tms/core` is not published to a registry yet, so you build it from
-source and install the packed file. Run this in an empty folder:
-
-```bash
-git clone https://github.com/intl-tms/core.git
-cd core
-npm install
-npm run build
-npm pack
-cd ..
-```
-
-`npm pack` writes `core/intl-tms-core-0.1.0.tgz`. Now create the app next to
-the `core` folder and install both packages:
+Create the app and install next-intl and the Core:
 
 ```bash
 npx create-next-app@latest my-app --typescript --app --src-dir --import-alias "@/*"
 cd my-app
-npm install next-intl ../core/intl-tms-core-0.1.0.tgz
+npm install next-intl @intl-tms/core
 ```
 
 The rest of the guide assumes those three choices: the App Router, a `src`

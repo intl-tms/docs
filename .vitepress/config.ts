@@ -15,7 +15,14 @@ export default defineConfig({
     nav: [
       {text: 'Developers', link: '/developers/', activeMatch: '^/developers/'},
       {text: 'Editors', link: '/editors/', activeMatch: '^/editors/'},
-      {text: 'Demo app', link: `${org}/demo-app`}
+      {text: 'Demo app', link: `${org}/demo-app`},
+      {
+        text: 'About',
+        items: [
+          {text: 'Credits', link: '/credits'},
+          {text: 'Privacy', link: '/privacy'}
+        ]
+      }
     ],
 
     sidebar: {
@@ -73,6 +80,11 @@ export default defineConfig({
       pattern: `${org}/docs/edit/main/:path`,
       text: 'Edit this page on GitHub'
     },
-    outline: [2, 3]
+    outline: [2, 3],
+    footer: {
+      message:
+        'Under development, not for production. Released under the MIT License. ' +
+        '<a href="/docs/credits">Credits</a> · <a href="/docs/privacy">Privacy</a>'
+    }
   }
 });

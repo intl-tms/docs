@@ -1,0 +1,43 @@
+/* The banner sits above the fixed nav; the nav and sidebar offset by this height. */
+:root {
+  --vp-layout-top-height: 40px;
+}
+
+.status-banner {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: var(--vp-z-index-layout-top);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  height: var(--vp-layout-top-height);
+  padding: 0 16px;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--vp-c-danger-1);
+  background-color: var(--vp-c-danger-soft);
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.status-banner a {
+  font-weight: 500;
+  color: inherit;
+  text-decoration: underline;
+}
+
+@media (max-width: 560px) {
+  .status-banner {
+    font-size: 12px;
+  }
+
+  .status-banner-long {
+    display: none;
+  }
+}

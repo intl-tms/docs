@@ -1,5 +1,11 @@
 # How it works
 
+::: danger Under development
+Intl TMS is not ready for production. It has no built-in authentication, and
+the API can change between any two releases.
+[Read why](./security#not-ready-for-production).
+:::
+
 Intl TMS is an in-context translation management system. A website renders
 translated text; Intl TMS makes every rendered string carry an invisible
 identifier of the translation key it came from. An editing tool running on the

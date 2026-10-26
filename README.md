@@ -18,3 +18,7 @@ pnpm preview   # serve the built site
 Pushing to `main` builds and publishes the site to GitHub Pages
 (`.github/workflows/deploy.yml`). The site is served from `/docs/`; change
 `base` in the config if it moves.
+
+## License
+
+[MIT](./LICENSE)

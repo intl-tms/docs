@@ -2,6 +2,25 @@
 
 **Read this before you ship.**
 
+## Not ready for production
+
+::: danger Under development
+Intl TMS is under active development and is **not ready for production**.
+
+- **There is no authentication.** The Core does not sign anyone in, keep
+  sessions or know who an Editor is. Every request is allowed or denied only by
+  the `authorize` function you write, and it is only as safe as that function.
+- **The demo app allows everyone.** Its `authorize` is
+  `() => editingEnabled`: while editing is switched on, anyone who can reach
+  the website can read and change its translations.
+- **The API can change between any two releases**, including the request
+  handler, the wire contract and the storage adapter interface.
+- Several protections are not built yet, among them size limits on request
+  bodies and rate limits.
+
+Use it on local and test environments only.
+:::
+
 ## The Toggle protects nothing
 
 The cookie `tms-edit=1` is a user-interface switch that tells your website to
