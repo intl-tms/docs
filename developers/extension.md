@@ -27,8 +27,7 @@ console says why, prefixed `[intl-tms]`.
 
 ## Building it
 
-The Core must be built first (`../core/dist`), since it is linked, not
-published.
+The Core is installed from npm as `@intl-tms/core` and bundled in.
 
 ```bash
 pnpm install
