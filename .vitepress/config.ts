@@ -5,8 +5,8 @@ const org = 'https://github.com/intl-tms';
 export default defineConfig({
   title: 'Intl TMS',
   description: "Edit a website's translations directly on the rendered page.",
-  // Served from https://intl-tms.github.io/docs/
-  base: '/docs/',
+  // Organization site: the GitHub repository must be named intl-tms.github.io.
+  base: '/',
   cleanUrls: true,
   lastUpdated: true,
   srcExclude: ['README.md'],
@@ -77,14 +77,14 @@ export default defineConfig({
     socialLinks: [{icon: 'github', link: `${org}/demo-app`}],
     search: {provider: 'local'},
     editLink: {
-      pattern: `${org}/docs/edit/main/:path`,
+      pattern: `${org}/intl-tms.github.io/edit/main/:path`,
       text: 'Edit this page on GitHub'
     },
     outline: [2, 3],
     footer: {
       message:
         'Under development, not for production. Released under the MIT License. ' +
-        '<a href="/docs/credits">Credits</a> · <a href="/docs/privacy">Privacy</a>'
+        '<a href="/credits">Credits</a> · <a href="/privacy">Privacy</a>'
     }
   }
 });

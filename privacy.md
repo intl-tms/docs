@@ -76,9 +76,9 @@ only to the endpoints that Storybook is configured with.
 
 If this page changes, the new version is published here and the date at the
 top changes. Its full history is in the
-[docs repository](https://github.com/intl-tms/docs/commits/main/privacy.md).
+[docs repository](https://github.com/intl-tms/intl-tms.github.io/commits/main/privacy.md).
 
 ## Contact
 
 Questions about this page can be asked as an issue in the
-[docs repository](https://github.com/intl-tms/docs/issues).
+[docs repository](https://github.com/intl-tms/intl-tms.github.io/issues).
