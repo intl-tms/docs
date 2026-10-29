@@ -156,23 +156,20 @@ Every option is listed in [Configuration](./configuration).
 Marking adds an invisible identifier to every string, naming the key it came
 from. It only happens in an **editing session**: a request that carries the
 cookie `tms-edit=1`, which the Extension sets when an Editor switches edit mode
-on.
+on, from someone signed in as an Editor. `authorize` is the check of step 8.
 
 ::: code-group
 
 ```ts [src/tms/messages.ts]
-import {cookies} from 'next/headers';
-import {
-  markCatalog,
-  TOGGLE_COOKIE_NAME,
-  TOGGLE_ON_VALUE,
-  type Catalog
-} from '@intl-tms/core';
+import {headers} from 'next/headers';
+import {isEditingRequest, markCatalog, type Catalog} from '@intl-tms/core';
+import {authorize} from '@/editors';
 import {editingEnabled} from './config';
 
 async function isEditingSession() {
   if (!editingEnabled) return false;
-  return (await cookies()).get(TOGGLE_COOKIE_NAME)?.value === TOGGLE_ON_VALUE;
+  const request = new Request(process.env.SITE_URL ?? 'http://localhost:3000', {headers: await headers()});
+  return isEditingRequest(request, authorize);
 }
 
 export async function prepareMessages<T extends Catalog>(messages: T) {
@@ -274,12 +271,13 @@ catch-all route at the path of `basePath`.
 
 ```ts [src/app/api/tms/[...path]/route.ts]
 import {createHandler, createMemoryAdapter} from '@intl-tms/core';
-import {config, editingEnabled} from '@/tms/config';
+import {authorize} from '@/editors';
+import {config} from '@/tms/config';
 
 const handler = createHandler({
   config,
   adapter: createMemoryAdapter(),
-  authorize: () => editingEnabled
+  authorize
 });
 
 export const GET = handler;
@@ -289,12 +287,22 @@ export const POST = handler;
 
 :::
 
-::: warning This authorization is for your own machine
-`authorize` decides who may read and save. Here it allows everyone while
-editing is enabled, which is only acceptable on `localhost`. Replace it with a
-real check, such as a signed-in session with a translator role, before you
-deploy. The cookie protects nothing: anyone can set one. See
-[Security](./security).
+`authorize` decides who may read and save: someone signed in to your login
+for Editors who holds the Editor role. To get one running on your machine,
+copy two folders from the [demo app](https://github.com/intl-tms/demo-app):
+
+- `apps/web/src/editors/` into `src/editors/`: the Editors' sessions, the
+  check, and a stand-in identity provider;
+- `apps/web/src/app/editors/` into `src/app/editors/`: a sign-in page and an
+  access page that plays the IT department.
+
+Exclude `/editors` from your locale middleware if you have one.
+
+::: warning The stand-in is for your own machine
+The stand-in lets anyone pick any account, with no password. Before you
+deploy, replace `src/editors/identity-provider.ts` with your organisation's
+identity provider: see [Signing Editors in](./editors-login). The cookie
+`tms-edit` protects nothing: anyone can set one. See [Security](./security).
 :::
 
 ## 9. Check that it works
@@ -314,6 +322,10 @@ Then ask the handler for its configuration:
 curl http://localhost:3000/api/tms/config
 ```
 
+It answers `401` with the sign-in address: you are not signed in. Open
+`http://localhost:3000/editors/sign-in` in Chrome and sign in as the first demo
+account. Chrome then gets the configuration:
+
 ```json
 {
   "protocol": 1,
@@ -325,7 +337,8 @@ curl http://localhost:3000/api/tms/config
     "usageRead": "http://localhost:3000/api/tms/usage/{key}"
   },
   "basePath": "http://localhost:3000/api/tms",
-  "sourceLocale": "en"
+  "sourceLocale": "en",
+  "access": {"name": "Ada Jensen", "write": true}
 }
 ```
 
@@ -348,7 +361,7 @@ That address, `http://localhost:3000/api/tms/config`, is your **Config URL**.
    unpacked** and pick the `extension/dist` folder.
 
 2. On `http://localhost:3000`, click the **Intl TMS** icon and paste the
-   Config URL.
+   Config URL. If you are not signed in, it says so and offers **Sign in**.
 3. Click **On** and allow access when Chrome asks. The page reloads and both
    texts get an outline.
 4. Hold **Alt** and click the title. Change it and click **Save all**.
@@ -366,7 +379,8 @@ Both are your part of the integration: see [Storage is yours](#storage-is-yours)
 | The panel cannot load or save | The app is not running on port 3000. `basePath` is built from `SITE_URL`, so start the app with `SITE_URL=http://localhost:3001 npm run dev`, or whichever port it uses. |
 | `Next.js encountered uncached data during prerendering` | The `<Suspense>` boundary in `src/app/layout.tsx` is missing. |
 | `ConfigError` when the server starts | A value in `src/tms/config.ts` is wrong. The message names it. |
-| The endpoints answer `401` in production | `editingEnabled` is off outside `next dev`. Set `TMS_EDITING=1` where Editors work, after replacing `authorize`. |
+| The endpoints answer `401` | You are not signed in to the login for Editors. Sign in at `/editors/sign-in`. In production, also check that `editingEnabled` is on: set `TMS_EDITING=1` where Editors work, after replacing the stand-in provider. |
+| The endpoints answer `403` | You are signed in without the Editor role, or editing is switched off on `/editors/access`. |
 
 The Extension also explains itself in the page's console, prefixed
 `[intl-tms]`. The [Editor guide](/editors/troubleshooting) covers what an

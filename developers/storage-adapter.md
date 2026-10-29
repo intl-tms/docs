@@ -34,8 +34,8 @@ Pass it to `createHandler` as `adapter`.
 
 | Operation | Contract |
 | --- | --- |
-| `getValues(key)` | Every stored Locale for the key. **Sparse**: a Locale with no row is absent. Empty when nothing is stored. |
-| `saveValue(key, write)` | Upsert one (key, Locale) as a **partial merge** of the supplied columns. A new row starts with an empty `value`. An empty string is a real value. Use `writePatch(write)`; an empty patch means do nothing. |
+| `getValues(key, context)` | Every stored Locale for the key. **Sparse**: a Locale with no row is absent. Empty when nothing is stored. |
+| `saveValue(key, write, context)` | Upsert one (key, Locale) as a **partial merge** of the supplied columns. A new row starts with an empty `value`. An empty string is a real value. Use `writePatch(write)`; an empty patch means do nothing. |
 | `getUsage(key)` | A key's usages, most recently seen first. Empty when none. |
 | `reportUsage(report)` | Upsert each (key, URL), overwriting count and last-seen. **Never prune.** |
 
@@ -44,6 +44,23 @@ only validated, rebuilt data.
 
 An adapter typed for one configuration is a compile error to hand to a handler
 built for another; an untyped adapter fits any configuration.
+
+### Who made a change
+
+Every operation also receives `context`. `context.identity` is who your
+`authorize` check said the caller is, `{ id, name? }`, so your adapter can store
+it with a saved row:
+
+```ts
+async saveValue(key, write, context) {
+  // ...store the write, plus:
+  // changedBy: context?.identity, changedAt: new Date()
+}
+```
+
+The Core only passes it on and records nothing itself. Leave the parameter out
+if you do not need it. Keep such columns out of what `getValues` returns; the
+editing tools have no use for them.
 
 ## Prove yours with the conformance suite
 

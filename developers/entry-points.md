@@ -19,6 +19,8 @@ The list of public names on each entry is pinned by a test.
 | Usage helpers | `normalizeUrl`, `usageSignature` |
 | Storage | `createMemoryAdapter`, `detectAdapterCapabilities`, `runAdapterConformance` |
 | Handler | `createHandler` |
+| Authorization | `sessionCheck`, `anyOf`, `allowAll`, `isEditingRequest`, `HELP_TEXT_MAX_LENGTH` |
+| Pairing (Storybook sign-in) | `createPairing`, `createMemoryPairingStore`, `EDITING_TOKEN_HEADER`, `EDITING_TOKEN_PREFIX`, `EDITING_TOKEN_LIFETIME_MS`, `EDITING_TOKEN_RECHECK_MS`, `PAIRING_CODE_LIFETIME_MS`, `PAIRING_TEXT` |
 
 `isSharedKey` and `SHARED_NOTICE` are described in
 [Shared translations](./shared-translations).
@@ -61,7 +63,7 @@ however you like and subscribe with `panel.subscribe`.
 
 | Group | Exports |
 | --- | --- |
-| Addon | `createStorybookAddon`, `EDIT_GLOBAL`, `STORYBOOK_TEXT` |
+| Addon | `createStorybookAddon`, `EDIT_GLOBAL`, `STORYBOOK_TEXT`, `SIGN_IN_TEXT` |
 | Built-in panel | `createPanelView`, `createLog`, `PANEL_CSS`, `PANEL_VIEW_TEXT` |
 
 `createStorybookAddon` is described in [The Storybook addon](./storybook).

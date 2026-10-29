@@ -89,6 +89,31 @@ bulk read in the wire contract yet. Nothing is reloaded after a save.
 A story's address is not a page of the website, and reporting it would fill
 "Used on" with addresses no Editor can visit.
 
+### Storybook always signs in through a pop-up
+
+A published Storybook usually runs on another site, where the website's
+session cookie does not travel. Rather than the cookie on the same site and
+something else elsewhere, every Storybook signs in the same way, also on
+`localhost`: a pop-up on the website's own login hands it a one-time code,
+which it exchanges with a secret only it holds for a short-lived editing
+token. One way is simpler to document, test and support, and the Editor still
+signs in with the organisation's login.
+
+### A token's user is judged by the website's own check
+
+The Core issues and checks editing tokens, but who may edit stays the
+website's decision: a token resolves to the website's own user, which the same
+`authorize` judges as a session's user. The Editor role and the editing switch
+therefore apply to Storybook exactly as to the website, and the Core knows
+nothing about roles.
+
+### The sign-in area is the Developer's to draw
+
+A Developer can draw the panel's sign-in area with their own view, given only
+the state and two actions. Every step that handles the code, the secret or
+the token stays in the Core, because a mistake there does not show on screen:
+it leaves a hole.
+
 ## Extension
 
 ### Chrome only, baseline scope

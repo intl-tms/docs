@@ -14,7 +14,7 @@ site until you switch it on there.
 
 ## Switch it on
 
-1. Open the website you want to edit and sign in as you normally do.
+1. Open the website you want to edit.
 2. Click the **Intl TMS** icon. The window says `Edit mode on <website>` so you
    can see which website you are switching.
 3. Paste the **Config URL** you were given for that website. It is a full
@@ -31,6 +31,48 @@ page and to save your edits through the website, as you. It is asked once per
 website, and only for that website.
 
 The page reloads once, and every piece of translated text gets an outline.
+
+## Sign in
+
+A website lets only its Editors edit. If you are not signed in, the extension's
+window and the side panel say:
+
+> You are not signed in to this website.
+
+with a **Sign in** button. It opens the website's sign-in page in a new tab.
+Sign in there with whatever sign-in method your organisation has set up, then
+go back to the tab you were editing in. The page reloads once by itself and the
+text gets its outlines. You do not need to click anything else.
+
+While you are signed in, the extension's window and the side panel say
+`Editing as <your name>`.
+
+### Once a day
+
+Signing in lasts at most a working day (10 hours). After that the side panel
+says you are not signed in. Anything you typed stays in the panel: press
+**Sign in**, sign in, go back to the tab and press **Save all** again. The page
+is not reloaded, so nothing you typed is lost.
+
+### "You may not edit translations here"
+
+> You are signed in, but may not edit translations here. Ask whoever manages
+> your access to this website.
+
+You are signed in, but your account does not have permission to edit. Ask
+whoever manages your access; the line under the message may say who. Once
+they have given you permission it can take up to an hour before it works.
+
+### Signing in from Storybook
+
+In Storybook the panel asks you to sign in too. Press **Sign in**: a small
+window opens where you sign in with whatever sign-in method your organisation
+has set up. It closes by itself, and the panel then shows your name. If you
+were already signed in to the website, the window closes straight away.
+
+If the panel says the browser blocked the window, allow pop-ups for the
+Storybook's address and press **Sign in** again. Signing in lasts at most 10
+hours there too, and closing the Storybook tab signs you out of it.
 
 ## Switch it off
 
