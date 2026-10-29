@@ -34,7 +34,7 @@ export const authorize = sessionCheck({
   user: (request) => editorSessions.user(sessionIdFrom(request)),
   // Whether they may: the Editor role, while editing is switched on.
   may: (user) => editingSwitch.isOn() && user.roles.includes("Editor"),
-  // Where the Extension sends someone who is not signed in.
+  // Your sign-in page, named in every 401.
   signIn: "/editors/sign-in",
   // Optional: your own words, plain text, at most 200 characters.
   help: {
@@ -44,10 +44,15 @@ export const authorize = sessionCheck({
 });
 ```
 
-- Nobody signed in: `401`, with the sign-in address. The Extension says
-  "You are not signed in to this website." and offers **Sign in**.
-- Signed in without the role: `403`. The Extension says the Editor may not edit
-  here, followed by your `forbidden` help text.
+- Nobody signed in: `401`, with the sign-in address and your `unauthenticated`
+  help text.
+- Signed in without the role: `403`, with your `forbidden` help text.
+- The Extension shows neither the address nor the help texts: they could reveal
+  your login or internal wording to whoever has the Extension. It only learns
+  that the Editor is not let in, and reloads the page once they have signed in
+  in another tab. Tell your Editors where to sign in. The
+  [Storybook addon](./storybook), which you set up yourself, shows the help
+  texts.
 - Signed in with the role: allowed. The user's `id` and `name` are passed to
   your [storage adapter](./storage-adapter) as `context.identity`, so you can
   store who made each change, and the Extension shows `Editing as <name>`.

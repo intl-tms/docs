@@ -21,7 +21,9 @@ For the Extension to work, a website must:
 It must never cache a marked response for another visitor, and never treat the
 cookie as authorization: anyone can set a cookie. Protection is the handler's
 `authorize`, built over a [login for Editors](./editors-login). The Extension
-learns how to sign in from the handler's refusal and holds no credential.
+holds no credential. A `401` or `403` only tells it the Editor is not let in:
+it never shows the sign-in address or help text the refusal carries, and
+reloads the page once the Editor has signed in in another tab.
 
 When cookies are blocked or the configuration cannot be loaded, the page's
 console says why, prefixed `[intl-tms]`.
