@@ -34,34 +34,31 @@ The page reloads once, and every piece of translated text gets an outline.
 
 ## Sign in
 
-A website lets only its Editors edit. If you are not signed in, the extension's
-window and the side panel say:
+A website lets only its Editors edit. Sign in to the website in an ordinary
+tab, with whatever sign-in method your organisation has set up, then go back
+to the tab you were editing in. The page reloads once by itself and the text
+gets its outlines. You do not need to click anything else.
 
-> You are not signed in to this website.
-
-with a **Sign in** button. It opens the website's sign-in page in a new tab.
-Sign in there with whatever sign-in method your organisation has set up, then
-go back to the tab you were editing in. The page reloads once by itself and the
-text gets its outlines. You do not need to click anything else.
+The extension says nothing about signing in: it never shows a sign-in address
+or anything the website says when it turns you away. Whoever gave you the
+Config URL can tell you where to sign in.
 
 While you are signed in, the extension's window and the side panel say
 `Editing as <your name>`.
 
 ### Once a day
 
-Signing in lasts at most a working day (10 hours). After that the side panel
-says you are not signed in. Anything you typed stays in the panel: press
-**Sign in**, sign in, go back to the tab and press **Save all** again. The page
-is not reloaded, so nothing you typed is lost.
+Signing in lasts at most a working day (10 hours). After that saving fails
+with `401` (see [Troubleshooting](./troubleshooting)). Anything you
+typed stays in the panel: sign in again in another tab, go back to the tab and
+press **Save all** again. The page is not reloaded, so nothing you typed is
+lost.
 
-### "You may not edit translations here"
+### Signed in, but nothing is outlined
 
-> You are signed in, but may not edit translations here. Ask whoever manages
-> your access to this website.
-
-You are signed in, but your account does not have permission to edit. Ask
-whoever manages your access; the line under the message may say who. Once
-they have given you permission it can take up to an hour before it works.
+Your account may not have permission to edit. Ask whoever manages your access
+to this website. Once they have given you permission it can take up to an hour
+before it works.
 
 ### Signing in from Storybook
 
