@@ -5,7 +5,7 @@ import {withBase} from 'vitepress';
 <template>
   <div class="status-banner" role="note">
     <strong>Under development.</strong>
-    <span class="status-banner-long">No built-in authentication.</span>
+    <span class="status-banner-long">The API can change.</span>
     <span>Not for production.</span>
     <a :href="withBase('/developers/security#not-ready-for-production')">Read why</a>
   </div>
