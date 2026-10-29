@@ -7,12 +7,11 @@
 ::: danger Under development
 Intl TMS is under active development and is **not ready for production**.
 
-- **There is no authentication.** The Core does not sign anyone in, keep
-  sessions or know who an Editor is. Every request is allowed or denied only by
-  the `authorize` function you write, and it is only as safe as that function.
-- **The demo app allows everyone.** Its `authorize` is
-  `() => editingEnabled`: while editing is switched on, anyone who can reach
-  the website can read and change its translations.
+- **The Core is not an identity provider.** Your website signs Editors in;
+  every request is allowed or denied by the `authorize` check you build, and it
+  is only as safe as that check and your login.
+- **The demo app's sign-in is not authentication.** Its stand-in identity
+  provider lets anyone pick any demo account. Its session and checks are real.
 - **The API can change between any two releases**, including the request
   handler, the wire contract and the storage adapter interface.
 - Several protections are not built yet, among them size limits on request
@@ -25,14 +24,39 @@ Use it on local and test environments only.
 
 The cookie `tms-edit=1` is a user-interface switch that tells your website to
 mark its Catalog. Anyone can set a cookie. Protection lives in `authorize`,
-never in the Toggle.
+never in the Toggle. Mark pages with `isEditingRequest(request, authorize)`, so
+the Toggle marks a page only for a signed-in Editor.
+
+## Editors sign in with a login of their own
+
+Build `authorize` with `sessionCheck` over a login for Editors only, through
+your organisation's identity provider. [Signing Editors in](./editors-login)
+has the setup and a recipe. In short, with the reasons there:
+
+- **Editors authenticate with your website's session**, carried by its cookie.
+  The editing tools hold no credential.
+- **The login for Editors is separate from any customer login**: its own
+  sign-in address, cookie and session settings. A customer session never
+  authorizes editing.
+- **A session lasts at most 10 hours**, and the account and its Editor role are
+  checked with the identity provider **at least every hour**, so a withdrawn
+  Editor loses access within the hour.
+- **The endpoints are on the same site as the pages**, because browsers do not
+  send a session cookie to another site.
+- **A Storybook published on another site** will sign in through a pop-up on
+  your login that hands it a short-lived editing token. That is not built yet.
 
 ## `authorize` is required and has no default
 
 It receives the request and the operation (`read` for GET, `write` for PUT and
-POST) and must answer `true` to allow. Anything else, including `undefined`,
-denies. It is *not* consulted for a CORS preflight, because a preflight carries
-no credentials.
+POST). It answers `true` or `{ identity }` to allow, and `"forbidden"` for
+someone signed in who may not (`403`). Anything else, including `false` and
+`undefined`, is not authenticated (`401`). It is *not* consulted for a CORS
+preflight, because a preflight carries no credentials.
+
+A refusal tells the editing tools how to sign in: a `401` carries the sign-in
+address and a `403` your help text. Both are fixed when the handler is built and
+never depend on the caller.
 
 - **Deny writes to anyone who may not translate.**
 - **Gate reads too**, unless your translations and page URLs are public.
@@ -76,9 +100,8 @@ origin in `cors.origins`.
 The [Storybook addon](./storybook) always does: a Storybook is its own origin.
 List it (`http://localhost:6006` in development, and a deployed Storybook's
 address if Editors use one), and remember that listing an origin only lets its
-requests through to `authorize`. Storybook is not signed in to your website, so
-the addon's `request` option must carry whatever `authorize` checks. Do not
-loosen `authorize` to make Storybook work.
+requests through to `authorize`. Storybook is not signed in to your website, and
+its sign-in is not built yet. Do not loosen `authorize` to make Storybook work.
 
 ## On the page
 

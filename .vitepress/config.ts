@@ -41,6 +41,7 @@ export default defineConfig({
             {text: 'Configuration', link: '/developers/configuration'},
             {text: 'Storage adapter', link: '/developers/storage-adapter'},
             {text: 'Wire contract', link: '/developers/wire-contract'},
+            {text: 'Signing Editors in', link: '/developers/editors-login'},
             {text: 'Security', link: '/developers/security'},
             {text: 'What marking does to strings', link: '/developers/marking'},
             {text: 'Shared translations', link: '/developers/shared-translations'}

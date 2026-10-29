@@ -106,18 +106,11 @@ export const handler = createHandler({
 List a deployed Storybook's origin the same way. There is no wildcard.
 
 `authorize` still decides who may read and write. Storybook is not signed in
-to your website, so give the addon whatever your check looks at:
-
-```ts
-const tms = createStorybookAddon({
-  config: "https://app.example.com/api/tms/config",
-  // A header your authorize function checks:
-  request: (url, init) => fetch(url, { ...init, headers: { ...init?.headers, "x-editor-token": token } }),
-  // Or the website's own session cookie. The website must then also set
-  // cors.credentials, and the cookie must be allowed cross-site.
-  // credentials: "include",
-});
-```
+to your website, and its own sign-in, a pop-up on your login for Editors that
+hands the addon a short-lived editing token, is not built yet. Until it is,
+the addon cannot read or save against endpoints that require a signed-in
+Editor. Outlines and the panel still work. Never put a key or token in a
+Storybook's source: a published Storybook is public.
 
 See [Security](./security) before exposing the endpoints to another origin.
 
@@ -273,7 +266,7 @@ const tms = createStorybookAddon({ config, request: (url, init) => handler(new R
 | "The editing configuration could not be loaded" in the panel | The address did not answer with a configuration. The reason follows the colon, and is also under [Diagnostics](#diagnostics) and in the console, prefixed `[intl-tms]`. A blocked cross-origin request shows up here: see [step 4](#_4-allow-storybook-s-origin). |
 | A row is missing for a Locale | The panel shows the Locales of the configuration. Check `locales` in `resolveConfig`. |
 | Saving shows `✗` and the console reports a blocked cross-origin request | Storybook's origin is not in `cors.origins`. The website answers `403`, and the browser keeps the answer from the addon. |
-| Saving shows `✗ (401)` | `authorize` refused. Give the addon a `request` that carries what it checks. |
+| Saving shows `✗ (401)` | `authorize` refused: Storybook is not signed in. Its sign-in is not built yet; see [Signing Editors in](./editors-login#storybook). |
 | Saving fails and the status line does not say why | Open **Diagnostics** in the panel: the `why` entry has the status and the website's reason for each Locale. |
 | The wrong row is marked "shown now" | The addon could not tell the story's Locale. Pass a `locale` function. |
 | Typing a letter in the panel triggers a Storybook shortcut | It should not: key events are stopped at the panel. Check that nothing else re-dispatches them. |

@@ -20,7 +20,8 @@ For the Extension to work, a website must:
 
 It must never cache a marked response for another visitor, and never treat the
 cookie as authorization: anyone can set a cookie. Protection is the handler's
-`authorize`.
+`authorize`, built over a [login for Editors](./editors-login). The Extension
+learns how to sign in from the handler's refusal and holds no credential.
 
 When cookies are blocked or the configuration cannot be loaded, the page's
 console says why, prefixed `[intl-tms]`.
