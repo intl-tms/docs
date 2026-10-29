@@ -99,36 +99,18 @@ export const handler = createHandler({
   config,
   adapter,
   authorize,
-  cors: { origins: ["http://localhost:6006"], credentials: true },
+  cors: { origins: ["http://localhost:6006"] },
 });
 ```
 
 List a deployed Storybook's origin the same way. There is no wildcard.
 
-`authorize` still decides who may read and write. Storybook has no sign-in of
-its own; it edits with your Editors' session:
-
-- **Storybook on the same site as your website** (in development:
-  `localhost:6006` and `localhost:3000`, another port on the same host): sign
-  in to your website in the same browser, and the session cookie travels with
-  Storybook's requests. Give the addon `credentials: "include"` and the
-  endpoints `credentials: true`, as above.
-
-  ```ts
-  const tms = createStorybookAddon({
-    config: "http://localhost:3000/api/tms/config",
-    credentials: "include",
-  });
-  ```
-
-- **Storybook on another site**, such as a published Storybook on its own
-  domain: the browser does not send the session cookie there. Its own sign-in,
-  a pop-up on your login for Editors that hands the addon a short-lived editing
-  token, is not built yet. Until it is, such a Storybook cannot read or save.
-  Outlines and the panel still work.
-
-Never put a key or token in a Storybook's source: a published Storybook is
-public.
+`authorize` still decides who may read and write. Storybook is not signed in
+to your website, and its own sign-in, a pop-up on your login for Editors that
+hands the addon a short-lived editing token, is not built yet. Until it is,
+the addon cannot read or save against endpoints that require a signed-in
+Editor. Outlines and the panel still work. Never put a key or token in a
+Storybook's source: a published Storybook is public.
 
 See [Security](./security) before exposing the endpoints to another origin.
 

@@ -249,11 +249,7 @@ alike. Ask for a recipe if you need one.
 
 ## Storybook
 
-A Storybook on the same site as your website, as in development, edits with
-the Editors' session: sign in to the website in the same browser. See
-[Storybook](./storybook#_4-allow-storybook-s-origin) for the two settings.
-
 A published Storybook usually runs on another site, where the session cookie
 does not travel. Its sign-in, a pop-up on your login that hands the addon a
-short-lived editing token, is not built yet. Until then such a Storybook
+short-lived editing token, is not built yet. Until then the Storybook addon
 cannot read or save against endpoints that require a session.
