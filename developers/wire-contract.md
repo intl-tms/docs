@@ -61,14 +61,13 @@ The real cause of a 500 goes to your `onError` hook, never to the response.
 ## Refusals
 
 ```json
-{ "error": "unauthorized", "code": "unauthorized", "auth": { "session": { "signIn": "https://example.com/editors/sign-in" }, "help": "Sign in with your company account." } }
+{ "error": "unauthorized", "code": "unauthorized", "auth": { "pair": { "address": "https://example.com/api/tms/pair" }, "help": "Sign in with your company account." } }
 { "error": "forbidden", "code": "forbidden", "help": "Ask IT for the Editor role." }
 ```
 
-`auth.session.signIn` is where an Editor signs in; `auth.session.credentials`
-is `true` when requests must include credentials. `auth.pair.address` is
-present when the handler offers [pairing](#pairing): the address of `/pair`.
-A check that declares nothing
-sends `auth: {}`. Help texts are plain text, at most 200 characters, with no
+`auth.credentials` is `true` when requests must include credentials.
+`auth.pair.address` is present when the handler offers [pairing](#pairing):
+the address of `/pair`. A refusal never names your sign-in page. A check that
+declares nothing sends `auth: {}`. Help texts are plain text, at most 200 characters, with no
 line breaks, and editing tools show them as text only. See
 [Signing Editors in](./editors-login).

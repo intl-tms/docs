@@ -58,11 +58,11 @@ someone signed in who may not (`403`). Anything else, including `false` and
 `undefined`, is not authenticated (`401`). It is *not* consulted for a CORS
 preflight, because a preflight carries no credentials.
 
-A refusal tells the editing tools how to sign in: a `401` carries the sign-in
-address and a `403` your help text. Both are fixed when the handler is built and
-never depend on the caller. The Extension shows neither, so they cannot leak
-your login address or internal wording through it; the Storybook addon shows
-the help texts.
+A refusal never names your sign-in page. It may carry your help texts, and
+says whether requests must include credentials and where Storybook pairs. All
+of it is fixed when the handler is built and never depends on the caller. The
+Extension shows no help text, so your internal wording cannot leak through it;
+the Storybook addon shows the help texts.
 
 - **Deny writes to anyone who may not translate.**
 - **Gate reads too**, unless your translations and page URLs are public.

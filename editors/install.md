@@ -39,8 +39,8 @@ tab, with whatever sign-in method your organisation has set up, then go back
 to the tab you were editing in. The page reloads once by itself and the text
 gets its outlines. You do not need to click anything else.
 
-The extension says nothing about signing in: it never shows a sign-in address
-or anything the website says when it turns you away. Whoever gave you the
+The extension says nothing about signing in: it never shows anything the
+website says when it turns you away. Whoever gave you the
 Config URL can tell you where to sign in.
 
 While you are signed in, the extension's window and the side panel say

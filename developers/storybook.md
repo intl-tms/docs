@@ -153,7 +153,6 @@ export const authorize = sessionCheck({
   // An editing token first, then the Editors' session.
   user: async (request) => (await pairing.user(request)) ?? editorSessions.user(request),
   may: (user) => editingIsOn() && user.roles.includes("Editor"),
-  signIn: "/editors/sign-in",
 });
 
 export const handler = createHandler({
