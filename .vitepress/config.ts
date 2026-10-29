@@ -15,6 +15,7 @@ export default defineConfig({
     nav: [
       {text: 'Developers', link: '/developers/', activeMatch: '^/developers/'},
       {text: 'Editors', link: '/editors/', activeMatch: '^/editors/'},
+      {text: 'IT', link: '/it/', activeMatch: '^/it/'},
       {text: 'Demo app', link: `${org}/demo-app`},
       {
         text: 'About',
@@ -60,6 +61,12 @@ export default defineConfig({
             {text: 'Entry points', link: '/developers/entry-points'},
             {text: 'Design decisions', link: '/developers/decisions'}
           ]
+        }
+      ],
+      '/it/': [
+        {
+          text: 'For IT',
+          items: [{text: 'Managing Editors', link: '/it/'}]
         }
       ],
       '/editors/': [
