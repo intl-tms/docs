@@ -18,8 +18,9 @@ tools.
 - **The Intl TMS extension.** See [Install and switch on](./install).
 - **A Config URL** for the website you want to edit. It is a full address
   beginning with `https://`, and the website's developer gives it to you.
-- **To be signed in** to the website with an account that is allowed to edit
-  translations.
+- **To be allowed to edit.** Whoever manages your access to the website gives
+  you permission. You sign in with whatever sign-in method your organisation
+  has set up; see [Sign in](./install#sign-in).
 
 ## The steps
 
