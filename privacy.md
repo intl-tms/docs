@@ -81,7 +81,8 @@ about them: an Editor's identifier and name, from the organisation's identity
 provider. It lives in:
 
 - the website's sessions for its login for Editors;
-- once the Storybook sign-in exists, the records of short-lived editing tokens;
+- the records of Storybook's short-lived editing tokens, which end with the
+  token (at most 10 hours after sign-in);
 - with each saved change, if the website's storage adapter keeps who made it.
   The Core passes the Editor's identifier and name to the adapter and records
   nothing itself.
@@ -92,7 +93,8 @@ nothing anywhere. The website's owner decides what is kept and for how long,
 and covers it in their own privacy notice.
 
 The Storybook addon runs inside a developer's Storybook and sends requests
-only to the endpoints that Storybook is configured with.
+only to the endpoints that Storybook is configured with. Its editing token is
+kept in that browser tab only, and is forgotten when the tab is closed.
 
 ## Changes
 

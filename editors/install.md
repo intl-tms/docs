@@ -63,6 +63,17 @@ You are signed in, but your account does not have permission to edit. Ask
 whoever manages your access; the line under the message may say who. Once
 they have given you permission it can take up to an hour before it works.
 
+### Signing in from Storybook
+
+In Storybook the panel asks you to sign in too. Press **Sign in**: a small
+window opens where you sign in with whatever sign-in method your organisation
+has set up. It closes by itself, and the panel then shows your name. If you
+were already signed in to the website, the window closes straight away.
+
+If the panel says the browser blocked the window, allow pop-ups for the
+Storybook's address and press **Sign in** again. Signing in lasts at most 10
+hours there too, and closing the Storybook tab signs you out of it.
+
 ## Switch it off
 
 Click the **Intl TMS** icon and click **Off**. The outlines disappear at once.

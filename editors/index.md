@@ -31,8 +31,9 @@ tools.
 ::: tip Working in Storybook?
 If your team has a Storybook with Intl TMS set up, you need no extension
 there: switch **Edit translations** on in Storybook's toolbar, then hold
-**Alt** and click a text, exactly as on the website. Your developer sets this
-up with [the Storybook addon](/developers/storybook).
+**Alt** and click a text, exactly as on the website. See
+[Signing in from Storybook](./install#signing-in-from-storybook). Your
+developer sets this up with [the Storybook addon](/developers/storybook).
 :::
 
 ::: tip Just want to try it?

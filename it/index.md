@@ -55,7 +55,8 @@ For an incident, ask the website's developers or operators for the
 **emergency stop**. It has two parts:
 
 - **End one Editor's sessions now.** The person is signed out at once
-  everywhere. Also remove their role, or they can simply sign in again.
+  everywhere, in Storybook too. Also remove their role, or they can simply
+  sign in again.
 - **Switch all editing off.** Nobody can edit until it is switched on again.
   Visitors see the website as always.
 
