@@ -212,12 +212,15 @@ export async function recheck(grant: string): Promise<Recheck> {
 - `GET /editors/sign-in` calls `startSignIn()`, keeps `pending` in a
   short-lived cookie of its own (`HttpOnly`, `Secure`, `SameSite=Lax`, ten
   minutes, path `/editors`), and redirects to `url`. This address is the
-  `signIn` in your check.
+  `signIn` in your check. When it is given `?return=`, a path on your website
+  starting with a single `/`, keep that in the pending cookie too: Storybook's
+  sign-in pop-up comes here that way.
 - `GET /editors/callback` reads `code` and `state`, calls `finishSignIn`,
   deletes the pending cookie, starts a session with `sessions.start(...)`, sets
-  the Editors' session cookie, and shows "Signed in. Go back to the tab you
-  were editing in."
-- `POST /editors/sign-out` ends the session and deletes the cookie.
+  the Editors' session cookie, and then redirects to the kept return path, or
+  else shows "Signed in. Go back to the tab you were editing in."
+- `POST /editors/sign-out` ends the session, ends the Editor's Storybook
+  sign-ins with `pairing.endAllOf(user.id)`, and deletes the cookie.
 
 Create the sessions with
 `createEditorSessions({ provider: { recheck }, recheckEveryMs: 60 * 60 * 1000 })`:
@@ -228,7 +231,8 @@ survives a restart and is shared between servers.
 ### 4. The emergency stop
 
 - **One Editor at once:** `sessions.endAllOf(id)` ends every session of that
-  account. Give whoever handles incidents a way to call it.
+  account, and `pairing.endAllOf(id)` every Storybook sign-in. Give whoever
+  handles incidents a way to call both.
 - **All editing at once:** read an editing switch on every request, from a
   stored setting that can be changed without a deploy, and refuse in `may`
   when it is off. No page is marked either, because marking asks the same
@@ -250,6 +254,16 @@ alike. Ask for a recipe if you need one.
 ## Storybook
 
 A published Storybook usually runs on another site, where the session cookie
-does not travel. Its sign-in, a pop-up on your login that hands the addon a
-short-lived editing token, is not built yet. Until then the Storybook addon
-cannot read or save against endpoints that require a session.
+does not travel, so it signs in through a pop-up on this login and edits with
+a short-lived editing token: see [The Storybook addon](./storybook#_5-let-editors-sign-in).
+The token follows the same rules as a session (10 hours from sign-in,
+re-checked every hour, judged by your check), using two more things from your
+sessions:
+
+- **`forPairing`**: the signed-in user of a request, with the grant and the
+  sign-in time, for the pop-up. The demo's `sessions.ts` has it.
+- **The re-check**, called with the token's user and grant. With the Microsoft
+  recipe it is `recheck(grant)` above, with the roles put back on the user.
+
+The demo's `pairing.ts` wires them up with `createPairing`, and its
+`recipe.test.ts` runs Storybook's sign-in against the stand-in.

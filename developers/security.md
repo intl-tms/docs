@@ -43,8 +43,12 @@ has the setup and a recipe. In short, with the reasons there:
   Editor loses access within the hour.
 - **The endpoints are on the same site as the pages**, because browsers do not
   send a session cookie to another site.
-- **A Storybook published on another site** will sign in through a pop-up on
-  your login that hands it a short-lived editing token. That is not built yet.
+- **Storybook signs in through a pop-up on your login**, which hands it a
+  short-lived editing token, wherever it is published. The pop-up hands a
+  sign-in only to an origin you list; the one-time code is useless without a
+  secret only that Storybook holds; and the token lives as long as a session,
+  is re-checked as often, and is judged by your `authorize`. Only digests of
+  codes and tokens are stored.
 
 ## `authorize` is required and has no default
 
@@ -100,8 +104,9 @@ origin in `cors.origins`.
 The [Storybook addon](./storybook) always does: a Storybook is its own origin.
 List it (`http://localhost:6006` in development, and a deployed Storybook's
 address if Editors use one), and remember that listing an origin only lets its
-requests through to `authorize`. Storybook is not signed in to your website, and
-its sign-in is not built yet. Do not loosen `authorize` to make Storybook work.
+requests through to `authorize`. Storybook carries an editing token, never your
+session cookie, so leave `cors.credentials` off for it. Do not loosen `authorize` to
+make Storybook work.
 
 ## On the page
 
