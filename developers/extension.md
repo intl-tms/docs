@@ -22,7 +22,7 @@ It must never cache a marked response for another visitor, and never treat the
 cookie as authorization: anyone can set a cookie. Protection is the handler's
 `authorize`, built over a [login for Editors](./editors-login). The Extension
 holds no credential. A `401` or `403` only tells it the Editor is not let in:
-it never shows the sign-in address or help text the refusal carries, and
+it never shows the help text a refusal carries, and
 reloads the page once the Editor has signed in in another tab.
 
 When cookies are blocked or the configuration cannot be loaded, the page's

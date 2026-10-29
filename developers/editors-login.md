@@ -34,8 +34,6 @@ export const authorize = sessionCheck({
   user: (request) => editorSessions.user(sessionIdFrom(request)),
   // Whether they may: the Editor role, while editing is switched on.
   may: (user) => editingSwitch.isOn() && user.roles.includes("Editor"),
-  // Your sign-in page, named in every 401.
-  signIn: "/editors/sign-in",
   // Optional: your own words, plain text, at most 200 characters.
   help: {
     unauthenticated: "Sign in with your company account.",
@@ -44,14 +42,13 @@ export const authorize = sessionCheck({
 });
 ```
 
-- Nobody signed in: `401`, with the sign-in address and your `unauthenticated`
-  help text.
+- Nobody signed in: `401`, with your `unauthenticated` help text.
 - Signed in without the role: `403`, with your `forbidden` help text.
-- The Extension shows neither the address nor the help texts: they could reveal
-  your login or internal wording to whoever has the Extension. It only learns
-  that the Editor is not let in, and reloads the page once they have signed in
-  in another tab. Tell your Editors where to sign in. The
-  [Storybook addon](./storybook), which you set up yourself, shows the help
+- A refusal never names your sign-in page, and the Extension shows no help
+  text: either could reveal your login or internal wording to whoever has the
+  Extension. It only learns that the Editor is not let in, and reloads the page
+  once they have signed in in another tab. Tell your Editors where to sign in.
+  The [Storybook addon](./storybook), which you set up yourself, shows the help
   texts.
 - Signed in with the role: allowed. The user's `id` and `name` are passed to
   your [storage adapter](./storage-adapter) as `context.identity`, so you can
@@ -216,10 +213,10 @@ export async function recheck(grant: string): Promise<Recheck> {
 
 - `GET /editors/sign-in` calls `startSignIn()`, keeps `pending` in a
   short-lived cookie of its own (`HttpOnly`, `Secure`, `SameSite=Lax`, ten
-  minutes, path `/editors`), and redirects to `url`. This address is the
-  `signIn` in your check. When it is given `?return=`, a path on your website
+  minutes, path `/editors`), and redirects to `url`. When it is given `?return=`, a path on your website
   starting with a single `/`, keep that in the pending cookie too: Storybook's
-  sign-in pop-up comes here that way.
+  sign-in pop-up comes here that way, through the `signIn` of
+  [its pairing](./storybook#_5-let-editors-sign-in).
 - `GET /editors/callback` reads `code` and `state`, calls `finishSignIn`,
   deletes the pending cookie, starts a session with `sessions.start(...)`, sets
   the Editors' session cookie, and then redirects to the kept return path, or

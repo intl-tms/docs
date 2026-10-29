@@ -322,7 +322,7 @@ Then ask the handler for its configuration:
 curl http://localhost:3000/api/tms/config
 ```
 
-It answers `401` with the sign-in address: you are not signed in. Open
+It answers `401`: you are not signed in. Open
 `http://localhost:3000/editors/sign-in` in Chrome and sign in as the first demo
 account. Chrome then gets the configuration:
 
