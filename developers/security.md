@@ -100,8 +100,11 @@ origin in `cors.origins`.
 The [Storybook addon](./storybook) always does: a Storybook is its own origin.
 List it (`http://localhost:6006` in development, and a deployed Storybook's
 address if Editors use one), and remember that listing an origin only lets its
-requests through to `authorize`. Storybook is not signed in to your website, and
-its sign-in is not built yet. Do not loosen `authorize` to make Storybook work.
+requests through to `authorize`. On the same site, Storybook sends the Editors'
+session cookie when the addon has `credentials: "include"` and the endpoints
+`credentials: true`, so the same check applies to it. On another site the
+cookie does not travel, and Storybook's own sign-in is not built yet. Do not
+loosen `authorize` to make Storybook work.
 
 ## On the page
 
