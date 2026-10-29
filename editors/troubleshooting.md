@@ -19,9 +19,10 @@ closed or answered with a refusal. Click **On** again and choose **Allow**.
 
 ## Nothing is outlined
 
-1. You are not signed in, or may not edit. The extension's window says so:
-   see [Sign in](./install#sign-in). A website marks its text only for its
-   Editors.
+1. You are not signed in, or may not edit. A website marks its text only for
+   its Editors, and the extension does not say which of the two it is: sign in
+   to the website in another tab and come back (see [Sign in](./install#sign-in)).
+   If you are signed in, ask whoever manages your access to this website.
 2. Edit mode is not on for this website. Open the popup: it must show **On**
    and name this website. Two addresses that differ only in the port are two
    websites.
@@ -37,8 +38,8 @@ The panel is showing only the text from the page. Open **Diagnostics** at the
 bottom of the panel (it opens by itself when something fails).
 
 1. The Config URL is wrong or the website is down.
-2. You are signed out of the website. The panel says so at the top: press
-   **Sign in**, sign in, go back, and Alt-click the text again.
+2. You are signed out of the website, or your account may not edit. Sign in to
+   the website in another tab, go back, and Alt-click the text again.
 
 ## Save shows ✗
 
@@ -50,7 +51,7 @@ Open **Diagnostics**. The line after `FAILED` says which:
 | `The page no longer holds this translation. Click the text again.` | The page reloaded or changed since you clicked. Alt-click the text again; what you typed is still in the panel. |
 | `No translation is selected…` | Alt-click an outlined text on the page first. |
 | `The configuration never loaded…` | Check the Config URL in the popup. |
-| `da: 401` or `da: 403` | You are not signed in, or may not edit. The line at the top of the panel says which. What you typed is kept: [sign in](./install#sign-in) and save again. |
+| `da: 401` or `da: 403` | `401`: you are not signed in. `403`: you are signed in, but may not edit. What you typed is kept: [sign in](./install#sign-in) to the website in another tab and save again, or ask whoever manages your access. |
 | `da: 400 …` | The website refused the text; the reason follows the number. |
 | `da: the request never reached the server…` | The website is unreachable. Check your connection and try again. |
 

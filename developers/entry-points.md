@@ -35,6 +35,7 @@ The list of public names on each entry is pinned by a test.
 | Editing session | `createSession` |
 | Client | `createClient`, `DEFAULT_TIME_LIMIT_MS`, `USAGE_COOLDOWN_MS` |
 | Locale | `resolveLocale` |
+| Refusals | `readSignInDescriptor`, `readHelpText`, `isHelpText`, `HELP_TEXT_MAX_LENGTH` |
 | Usage helpers | `aggregateUsage`, `isHttpUrl` |
 | Panel store | `createPanelStore` |
 | Panel logic | `buildChanges`, `changedColumns`, `shouldRenderToolbar`, `resolveToolbarFilters`, `visibleLocales`, `hiddenErrors`, `usagePath`, `relativeTime`, `conflictNotice`, `explainSaveFailure`, `fieldText`, `PANEL_TEXT` |

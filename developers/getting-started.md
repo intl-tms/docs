@@ -361,7 +361,8 @@ That address, `http://localhost:3000/api/tms/config`, is your **Config URL**.
    unpacked** and pick the `extension/dist` folder.
 
 2. On `http://localhost:3000`, click the **Intl TMS** icon and paste the
-   Config URL. If you are not signed in, it says so and offers **Sign in**.
+   Config URL. Sign in at `/editors/sign-in` first if you are not signed in:
+   the Extension does not offer it.
 3. Click **On** and allow access when Chrome asks. The page reloads and both
    texts get an outline.
 4. Hold **Alt** and click the title. Change it and click **Save all**.

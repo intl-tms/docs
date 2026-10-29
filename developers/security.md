@@ -60,7 +60,9 @@ preflight, because a preflight carries no credentials.
 
 A refusal tells the editing tools how to sign in: a `401` carries the sign-in
 address and a `403` your help text. Both are fixed when the handler is built and
-never depend on the caller.
+never depend on the caller. The Extension shows neither, so they cannot leak
+your login address or internal wording through it; the Storybook addon shows
+the help texts.
 
 - **Deny writes to anyone who may not translate.**
 - **Gate reads too**, unless your translations and page URLs are public.
