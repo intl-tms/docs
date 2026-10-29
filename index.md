@@ -32,8 +32,8 @@ features:
 ---
 
 ::: danger Under development, not for production
-Intl TMS has no built-in authentication, and the API can change between any
-two releases. Use it on local and test environments only.
+The API can change between any two releases, and some protections are not
+built yet. Use it on local and test environments only.
 [Read why](/developers/security#not-ready-for-production).
 :::
 

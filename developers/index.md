@@ -1,8 +1,8 @@
 # How it works
 
 ::: danger Under development
-Intl TMS is not ready for production. It has no built-in authentication, and
-the API can change between any two releases.
+Intl TMS is not ready for production. The API can change between any two
+releases, and some protections are not built yet.
 [Read why](./security#not-ready-for-production).
 :::
 
